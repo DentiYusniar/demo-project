@@ -61,7 +61,7 @@ public class login_test extends base {
     @Test (priority = 3)
     public void testLoginEmptyUsername() {
         login_page login_page = new login_page(driver);
-        login_page.login("standard_user", "wrongpass");
+        login_page.login("", "wrongpass");
 
         // Tunggu maksimal 10 detik sampai message muncul
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -72,13 +72,13 @@ public class login_test extends base {
         );
 
         Assert.assertTrue(login_page.isErrorDisplayed());
-        Assert.assertEquals(login_page.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service");
+        Assert.assertEquals(login_page.getErrorMessage(), "Epic sadface: Username is required");
     }
 
     @Test (priority = 4)
     public void testLoginEmptyPassword() {
         login_page login_page = new login_page(driver);
-        login_page.login("wrongusername", "secret_sauce");
+        login_page.login("wrongusername", "");
 
         // Tunggu maksimal 10 detik sampai message muncul
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -89,6 +89,6 @@ public class login_test extends base {
         );
 
         Assert.assertTrue(login_page.isErrorDisplayed());
-        Assert.assertEquals(login_page.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service");
+        Assert.assertEquals(login_page.getErrorMessage(), "Epic sadface: Username is required");
     }
 }
